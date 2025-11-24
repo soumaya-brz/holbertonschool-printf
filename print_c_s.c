@@ -2,9 +2,9 @@
 
 /**
  * print_char - prints a character
- * @args: va_list containing the character to print
+ * @args: va_list containing the character
  *
- * Return: Always returns 1 (the number of characters printed)
+ * Return: Always 1
  */
 int print_char(va_list args)
 {
@@ -15,24 +15,19 @@ int print_char(va_list args)
 }
 
 /**
- * print_string - Prints a string
- * @args: va_list containing the string to print
+ * print_string - prints a string
+ * @args: va_list containing the string
  *
- * description:
- * If the string is NULL, this function prints "(null)" to mimic
- * the behavior of the standard printf.
- *
- * Return: number of character printed
+ * Return: Number of characters printed
  */
 int print_string(va_list args)
 {
 	char *s = va_arg(args, char *);
 	int i = 0;
+	char *nulls = "(null)";
 
 	if (!s)
 	{
-		char *nulls = "(null)";
-
 		while (nulls[i])
 		{
 			_putchar(nulls[i]);
@@ -50,12 +45,14 @@ int print_string(va_list args)
 }
 
 /**
- * print_percent - Prints a percent sign '%'
+ * print_percent - prints a percent sign '%'
+ * @args: unused va_list parameter
  *
- *Return: Always returns 1 (the number of characters printed)
+ * Return: Always 1
  */
-int print_percent(void)
+int print_percent(va_list args)
 {
+	(void)args;
 	_putchar('%');
 	return (1);
 }

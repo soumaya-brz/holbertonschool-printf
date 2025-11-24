@@ -1,64 +1,86 @@
 #include "main.h"
 
 /**
+ * handle_specifier - Handle a format specifier found after '%'
+ * @format: format string
+ * @idx: pointer to current index in format (will be advanced past specifier)
+ * @args: va_list of arguments
+ * @funcs: table mapping specifiers to handler functions
+ *
+ * Description: This helper searches funcs[] for the character at
+ * format[*idx] and calls the matching handler. If no handler is
+ * found, it prints '%' and the unknown character.
+ *
+ * Return: number of characters printed for this specifier
+ */
+static int handle_specifier(const char *format, int *idx, va_list args,
+	printer_t funcs[])
+{
+	int j = 0, printed = 0, found = 0;
+
+	(*idx)++;
+	if (format[*idx] == '\0')
+		return (0);
+
+	while (funcs[j].symbol)
+	{
+		if (funcs[j].symbol == format[*idx])
+		{
+			printed += funcs[j].print(args);
+			found = 1;
+			break;
+		}
+		j++;
+	}
+
+	if (!found)
+	{
+		_putchar('%');
+		_putchar(format[*idx]);
+		printed += 2;
+	}
+
+	return (printed);
+}
+
+/**
  * _printf - Produces output according to a format
- * @format: A string containing zero or more format specifiers
+ * @format: A string containing format specifiers
  *
  * Description:
- * This function is a simplified recreation of the standard printf.
- * It scans the format string character by character:
+ * Simplified printf supporting %c, %s and %% for now. Uses a table of
+ * printer_t to dispatch specifiers to their handler functions.
  *
- * - If the character is not '%', it is printed directly.
- *   - If a '%' is encountered, the function checks the next character
- *   to determine which conversion specifier to use.
- *
- *   The function delegates the handling of each specifier to
- *   dedicated helper functions (such as print_char, print_string,
- *   print_percent, etc.).
- *
- *   Supported specifiers in this version:
- *   %c → print a character
- *   %s → print a string
- *    %% → print a literal '%'
- *
- *    Return:
- *    The total number of characters printed. If `format` is NULL,
- *    the function returns -1.
+ * Return: total number of characters printed, or -1 on error
  */
 int _printf(const char *format, ...)
 {
 	va_list args;
-	int i = 0, printed = 0;
+	int i = 0, printed_chars = 0;
+
+	printer_t funcs[] = {
+		{'c', print_char},
+		{'s', print_string},
+		{'%', print_percent},
+		{'\0', NULL}
+	};
 
 	if (!format)
 		return (-1);
 
 	va_start(args, format);
-	while (format && format[i])
+	while (format[i])
 	{
 		if (format[i] == '%')
-		{
-			i++;
-			if (format[i] == 'c')
-				printed += print_char(args);
-			else if (format[i] == 's')
-				printed += print_string(args);
-			else if (format[i] == '%')
-				printed += print_percent();
-			else
-			{
-				_putchar('%');
-				_putchar(format[i]);
-				printed += 2;
-			}
-		}
+			printed_chars += handle_specifier(format, &i, args, funcs);
 		else
 		{
 			_putchar(format[i]);
-			printed++;
+			printed_chars++;
 		}
 		i++;
 	}
 	va_end(args);
-	return (printed);
+
+	return (printed_chars);
 }

@@ -1,4 +1,3 @@
-cat > .gitigore <<'EOF'
 #fichiers objets et exécutables
 *.o
 *.out

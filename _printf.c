@@ -14,7 +14,7 @@
  * Return: number of characters printed for this specifier
  */
 static int handle_specifier(const char *format, int *idx, va_list args,
-	printer_t funcs[])
+							printer_t funcs[])
 {
 	int j = 0, printed = 0, found = 0;
 
@@ -62,8 +62,10 @@ int _printf(const char *format, ...)
 		{'c', print_char},
 		{'s', print_string},
 		{'%', print_percent},
-		{'\0', NULL}
-	};
+		{'d', print_int},
+		{'i', print_int},
+		{'p', print_pointer},
+		{'\0', NULL}};
 
 	if (!format)
 		return (-1);

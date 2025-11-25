@@ -12,7 +12,7 @@
 #include <stdint.h> /* types entiers fixes (uintptr_t) */
 
 /* point d'entrée */
-int _printf(const char *format, ...)
+int _printf(const char *format, ...);
 
 int _putchar(char C);
 
@@ -21,11 +21,11 @@ int print_char(va_list args);
 int print_string(va_list args);
 int print_percent(void);
 
-int print_int(va_list args); /* %d / %i */
-int print_unsigned(va_list args); /* %u */
-int print_octal(va_list args); /* %o */
+int print_int(va_list args);				/* %d / %i */
+int print_unsigned(va_list args);			/* %u */
+int print_octal(va_list args);				/* %o */
 int print_hex(va_list args, int uppercase); /* %x / %X */
-int print_pointer(va_list args); /* %p */
+int print_pointer(va_list args);			/* %p */
 
 int _strlen(const char *s);
 char *convert_unsigned(unsigned long num, int base, int uppercase);

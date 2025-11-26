@@ -1,0 +1,16 @@
+#fichiers objets et exécutables
+*.o
+*.out
+a.out
+
+#fichier temporaires éditeur
+*~
+.vscode/
+.idea/
+
+#dossier tests pour ignorer les sorties
+tests/*.out
+
+#devcontainer pour pas le partager
+.devcontainer/
+EOF

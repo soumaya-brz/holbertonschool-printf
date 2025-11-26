@@ -1,0 +1,13 @@
+/usr/bin/ld: /usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/Scrt1.o: in function `_start':
+(.text+0x1b): undefined reference to `main'
+/usr/bin/ld: /tmp/ccasjJe7.o: in function `handle_specifier':
+_printf.c:(.text+0xe4): undefined reference to `_putchar'
+/usr/bin/ld: _printf.c:(.text+0x101): undefined reference to `_putchar'
+/usr/bin/ld: /tmp/ccasjJe7.o: in function `_printf':
+_printf.c:(.text+0x2c6): undefined reference to `_putchar'
+/usr/bin/ld: /tmp/ccqt0ohR.o: in function `print_char':
+print_c_s.c:(.text+0x5f): undefined reference to `_putchar'
+/usr/bin/ld: /tmp/ccqt0ohR.o: in function `print_string':
+print_c_s.c:(.text+0xf5): undefined reference to `_putchar'
+/usr/bin/ld: /tmp/ccqt0ohR.o:print_c_s.c:(.text+0x12c): more undefined references to `_putchar' follow
+collect2: error: ld returned 1 exit status
